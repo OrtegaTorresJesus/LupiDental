@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lupidental - Prótesis Dentales de Calidad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        /* Header y Navegación */
+        header {
+            background-color: #242424;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.4s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(6px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #a0a0a0;
+            transition: color 0.3s;
+        }
+
+        .logo img {
+            width: 42px;
+            height: auto;
+            display: block;
+        }
+
+        .logo:hover {
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        /* Nav link con subrayado animado */
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: #ffffff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */ 
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            padding: 4rem 2rem 0 2rem; /* posicion texto (reducción para subir textos) */
+            margin-top: 0;
+            background-image: url("/media/57.jpeg");
+            background-size: cover;
+            background-position: right;
+            background-repeat: no-repeat;
+        }
+
+        /* Animación de entrada del hero */
+        .hero h1 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 6rem;
+            font-weight: 450;
+            letter-spacing: 9px;
+            margin-bottom: 1rem;
+            color: #cdcdcd;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease forwards 0.3s;
+            max-width: 600px;
+        }
+
+        .hero h1 img {
+            width: 80px;
+            height: auto;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #909090;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 1s ease forwards 0.7s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Reveal al hacer scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Secciones */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #b0b0b0;
+            position: relative;
+        }
+
+        /* Línea decorativa bajo los títulos de sección */
+        h2::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background-color: #606060;
+            margin: 1rem auto 0;
+            transition: width 0.4s ease;
+        }
+
+        section:hover h2::after {
+            width: 80px;
+        }
+
+        /* Sobre Nosotros */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Servicios */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            align-items: stretch;
+            justify-content: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .service-card {
+            background-color: #242424;
+            padding: 2.5rem;
+            border-radius: 2px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 1px solid #333;
+            overflow: hidden;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .service-card .service-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            margin-bottom: 1.5rem;
+            border-radius: 2px;
+            overflow: hidden;
+            background-color: #1d1d1d;
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(160, 160, 160, 0.1);
+            border-color: #555;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #b0b0b0;
+        }
+
+        .service-card p {
+            color: #909090;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-btn {
+            background-color: #333;
+            color: #b0b0b0;
+            border: 1px solid #555;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .service-btn:hover {
+            background-color: #444;
+            color: #ffffff;
+            border-color: #777;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 2px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            background-color: #242424;
+            padding: 2rem;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: #b0b0b0;
+            font-size: 1.8rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #909090;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #ffffff;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section h3 {
+            color: #b0b0b0;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #333;
+            letter-spacing: 1px;
+        }
+
+        .modal-section p {
+            color: #a0a0a0;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .modal-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .modal-image {
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .modal-image {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto;
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid #333;
+            background-color: #1f1f1f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .modal-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Galería */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background-color: #2d2d2d;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #606060;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.85);
+            color: #e0e0e0;
+            padding: 1.5rem 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 300;
+            box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+
+        /* Contacto */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            background-color: #242424;
+            padding: 3rem;
+            border-radius: 2px;
+            margin-top: 2rem;
+            border: 1px solid #333;
+            transition: border-color 0.3s;
+        }
+
+        .contact-info:hover {
+            border-color: #555;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            margin-bottom: 1rem;
+        }
+
+        .email-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .email-link:hover {
+            color: #ffffff;
+        }
+
+        .location {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #909090;
+        }
+
+        .maps-link {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+            border-bottom: 1px solid #444;
+        }
+
+        .maps-link:hover {
+            color: #ffffff;
+            border-bottom-color: #888;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            text-align: center;
+            padding: 2rem;
+            color: #606060;
+            border-top: 1px solid #2d2d2d;
+        }
+
+        /* Cursor personalizado sutil */
+        @media (hover: hover) {
+            .gallery-item {
+                cursor: zoom-in;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <div class="logo">
+                <img src="media/logoLD.png" alt="Logo Lupidental">
+                LUPIDENTAL
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+<!--Header --> 
+    <section id="inicio" class="hero">
+        <h1><img src="media/logoLD.png" alt="Logo Lupidental"><strong>LUPIDENTAL</strong></h1>
+        <p>Laboratorio de Prótesis Dental</p>
+                <p>PRECISIÓN - NATURALIDAD - CONFIANZA</p>
+    </section>
+<!--Sobre Nosotros --> 
+    <section id="sobre-nosotros">
+        <h2 class="reveal">SOBRE NOSOTROS</h2>
+        <div class="about-content reveal">
+            <p></p>
+            <p style="margin-top: 1.5rem;">Con más de 25 años de experiencia, somos un laboratorio de prótesis dental especializado en estética de alto nivel.<br>
+            A lo largo de nuestra trayectoria hemos aprendido que la excelencia técnica debe ir siempre acompañada de un trato cercano y personalizado, basado en la 
+            confianza, la responsabilidad y el compromiso con cada cliente. <br> 
+            Conscientes de que detrás de cada trabajo hay una planificación clínica y sobre todo, un paciente, organizamos nuestros procesos con rigor y fiabilidad, 
+            garantizando tiempos de entrega y resultados de alta calidad <br>
+            Creemos firmemente en la comunicación constante como pilar fundamental del trabajo bien hecho. Mantenemos un contacto fluido durante todo el proceso y ofrecemos 
+            asesoramiento personalizado en la elección de materiales, protocolos y soluciones adaptadas a cada caso clínico.<br>
+            Combinamos la experiencia artesanal con las últimas tecnologías en digitalización y sistemas CAD/CAM, lo que nos permite alcanzar un nivel superior de precisión, 
+            predictivilidad y excelencia estética. Más que un proveedor, nos consideramos un miembro más del equipo de la clínica, 
+            implicados en cada tratamiento con un objetivo común: Crear sonrisas naturales, funcionales y duraderas que marquen la diferencia. </p>
+        </div>
+    </section>
+<!--Servicios -->
+    <section id="servicios">
+        <h2 class="reveal">SERVICIOS</h2>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <h3>Prótesis fija</h3> <br>
+                <div class="service-image">
+                    <img src="media/4.jpeg" alt="Prótesis fija" />
+                </div>
+                <button class="service-btn" onclick="openModal('modal-protesis-fija')">Más Información</button>
+            </div>
+            <div class="service-card reveal">
+                <h3>Prótesis removible y sobredentaduras</h3>
+                <div class="service-image">
+                    <img src="media/63.jpeg" alt="Prótesis removible" />
+                </div>
+                <button class="service-btn" onclick="openModal('modal-protesis-removible')">Más Información</button>
+            </div>
+            <div class="service-card reveal">
+                <h3>Ortodoncia</h3>
+                <div class="service-image">
+                    <img src="media/17.jpeg" alt="Ortodoncia" />
+                </div>
+                <button class="service-btn" onclick="openModal('modal-ortodoncia')">Más Información</button>
+            </div>
+            <div class="service-card reveal">
+                <h3>Férulas</h3>
+                <div class="service-image">
+                    <img src="media/33.jpeg" alt="Prótesis sobre implantes" />
+                </div>
+                <button class="service-btn" onclick="openModal('modal-ferulas')">Más Información</button>
+            </div>
+        </div>
+    </section>
+
+    <!--Contacto -->   
+    <section id="contacto"> 
+        <h2 class="reveal">CONTACTO</h2>
+        <div class="contact-content reveal">
+            <p>¿Tiene alguna consulta? No dude en contactarnos.</p>
+            <div class="contact-info">
+                <p><strong>Email</strong></p>
+                <a href="mailto:lupidental@gmail.com" class="email-link">Lupidental@gmail.com</a>
+                
+                <br> <br class="location">
+                <p><strong>Teléfono</strong></p>
+                <p>+34 958 800 846</p>
+
+                <br class="location">
+                <p><strong>Horario</strong></p>
+                <p>Lunes a Viernes: 7:00 - 17:00</p>
+
+                <div class="location">
+                    <p><strong>Ubicación</strong></p>
+                    <a href="https://www.google.com/maps/place/Lupidental/@37.180904,-3.6158482,56m/data=!3m1!1e3!4m6!3m5!1s0xd71fd3df92d99ab:0xb70ce9ba87648f12!8m2!3d37.1808724!4d-3.6159468!16s%2Fg%2F11yv2q1rb0?entry=ttu&g_ep=EgoyMDI2MDYwMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="maps-link">
+                        Calle Recoletos, 10 <br> 18004 Granada, España <br></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!--Galería --> 
+    <section id="galeria">
+        <h2 class="reveal">GALERÍA</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/1.jpeg" alt="Imagen ejemplo 1"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/2.jpeg" alt="Imagen ejemplo 2"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/3.jpeg" alt="Imagen ejemplo 3"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/4.jpeg" alt="Imagen ejemplo 4"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/5.jpeg" alt="Imagen ejemplo 5"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/6.jpeg" alt="Imagen ejemplo 6"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/7.jpeg" alt="Imagen ejemplo 7"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/8.jpeg" alt="Imagen ejemplo 8"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/9.jpeg" alt="Imagen ejemplo 9"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/10.jpeg" alt="Imagen ejemplo 10"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/11.jpeg" alt="Imagen ejemplo 11"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/12.jpeg" alt="Imagen ejemplo 12"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/13.jpeg" alt="Imagen ejemplo 13"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/14.jpeg" alt="Imagen ejemplo 14"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/15.jpeg" alt="Imagen ejemplo 15"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/16.jpeg" alt="Imagen ejemplo 16"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/17.jpeg" alt="Imagen ejemplo 17"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/18.jpeg" alt="Imagen ejemplo 18"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/19.jpeg" alt="Imagen ejemplo 19"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/20.jpeg" alt="Imagen ejemplo 20"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/21.jpeg" alt="Imagen ejemplo 21"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/22.jpeg" alt="Imagen ejemplo 22"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/23.jpeg" alt="Imagen ejemplo 23"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/24.jpeg" alt="Imagen ejemplo 24"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/25.jpeg" alt="Imagen ejemplo 25"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/26.jpeg" alt="Imagen ejemplo 26"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/27.jpeg" alt="Imagen ejemplo 27"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/28.jpeg" alt="Imagen ejemplo 28"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/29.jpeg" alt="Imagen ejemplo 29"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/30.jpeg" alt="Imagen ejemplo 30"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/31.jpeg" alt="Imagen ejemplo 31"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/32.jpeg" alt="Imagen ejemplo 32"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/33.jpeg" alt="Imagen ejemplo 33"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/34.jpeg" alt="Imagen ejemplo 34"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/35.jpeg" alt="Imagen ejemplo 35"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/36.jpeg" alt="Imagen ejemplo 36"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/37.jpeg" alt="Imagen ejemplo 37"></div>
+            <!-- <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/38.jpeg" alt="Imagen ejemplo 38"></div> -->            
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/39.jpeg" alt="Imagen ejemplo 39"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/40.jpeg" alt="Imagen ejemplo 40"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/41.jpeg" alt="Imagen ejemplo 41"></div>
+            <!-- <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/42.jpeg" alt="Imagen ejemplo 42"></div> 
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/43.jpeg" alt="Imagen ejemplo 43"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/44.jpeg" alt="Imagen ejemplo 44"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/45.jpeg" alt="Imagen ejemplo 45"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/46.jpeg" alt="Imagen ejemplo 46"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/47.jpeg" alt="Imagen ejemplo 47"></div> -->
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/48.jpeg" alt="Imagen ejemplo 48"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/49.jpeg" alt="Imagen ejemplo 49"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/50.jpeg" alt="Imagen ejemplo 50"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/51.jpeg" alt="Imagen ejemplo 51"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/52.jpeg" alt="Imagen ejemplo 52"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/53.jpeg" alt="Imagen ejemplo 53"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/54.jpeg" alt="Imagen ejemplo 54"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/55.jpeg" alt="Imagen ejemplo 55"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/56.jpeg" alt="Imagen ejemplo 56"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/57.jpeg" alt="Imagen ejemplo 57"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/58.jpeg" alt="Imagen ejemplo 58"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/59.jpeg" alt="Imagen ejemplo 59"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/60.jpeg" alt="Imagen ejemplo 60"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/61.jpeg" alt="Imagen ejemplo 61"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/62.jpeg" alt="Imagen ejemplo 62"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/63.jpeg" alt="Imagen ejemplo 63"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/64.jpeg" alt="Imagen ejemplo 64"></div>
+            <!--<div class="gallery-item reveal"> <img class="gallery-item-img" src="media/65.jpeg" alt="Imagen ejemplo 65"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/66.jpeg" alt="Imagen ejemplo 66"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/67.jpeg" alt="Imagen ejemplo 67"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/68.jpeg" alt="Imagen ejemplo 68"></div> -->
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/69.jpeg" alt="Imagen ejemplo 69"></div>
+            <!-- <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/70.jpeg" alt="Imagen ejemplo 70"></div> -->
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/71.jpeg" alt="Imagen ejemplo 71"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/72.jpeg" alt="Imagen ejemplo 72"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/73.jpeg" alt="Imagen ejemplo 73"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/74.jpeg" alt="Imagen ejemplo 74"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/75.jpeg" alt="Imagen ejemplo 75"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/76.jpeg" alt="Imagen ejemplo 76"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/77.jpeg" alt="Imagen ejemplo 77"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/78.jpeg" alt="Imagen ejemplo 78"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/79.jpeg" alt="Imagen ejemplo 79"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/80.jpeg" alt="Imagen ejemplo 80"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/81.jpeg" alt="Imagen ejemplo 81"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/82.jpeg" alt="Imagen ejemplo 82"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/83.jpeg" alt="Imagen ejemplo 83"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/84.jpeg" alt="Imagen ejemplo 84"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/86.jpeg" alt="Imagen ejemplo 86"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/87.jpeg" alt="Imagen ejemplo 87"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/88.jpeg" alt="Imagen ejemplo 88"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/89.jpeg" alt="Imagen ejemplo 89"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/90.jpeg" alt="Imagen ejemplo 90"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/91.jpeg" alt="Imagen ejemplo 91"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/92.jpeg" alt="Imagen ejemplo 92"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/93.jpg" alt="Imagen ejemplo 93"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/94.jpg" alt="Imagen ejemplo 94"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/95.jpg" alt="Imagen ejemplo 95"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/96.jpeg" alt="Imagen ejemplo 96"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/97.jpeg" alt="Imagen ejemplo 97"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/98.jpeg" alt="Imagen ejemplo 98"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/99.jpeg" alt="Imagen ejemplo 99"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/100.jpeg" alt="Imagen ejemplo 100"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/101.jpeg" alt="Imagen ejemplo 101"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/102.jpeg" alt="Imagen ejemplo 102"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/103.JPG" alt="Imagen ejemplo 103"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/104.JPG" alt="Imagen ejemplo 104"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/105.JPG" alt="Imagen ejemplo 105"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/106.JPG" alt="Imagen ejemplo 106"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/107.JPG" alt="Imagen ejemplo 107"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/108.JPG" alt="Imagen ejemplo 108"></div>
+            <div class="gallery-item reveal"> <img class="gallery-item-img" src="media/109.JPG" alt="Imagen ejemplo 109"></div>
+            
+
+        </div>
+    </section>
+
+    <!-- Modal Prótesis Fija -->
+    <div id="modal-protesis-fija" class="modal" onclick="closeModal('modal-protesis-fija', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Prótesis Fija</h2>
+                <button class="modal-close" onclick="closeModal('modal-protesis-fija')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Prótesis en circonio</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/6.jpeg" alt="Prótesis en circonio 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/26.jpeg" alt="Prótesis en circonio 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Estructuras de refuerzo de titanio</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/12.jpeg" alt="Estructura de titanio 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/29.jpeg" alt="Estructura de titanio 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Prótesis en metal cerámica</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/7.jpeg" alt="Metal cerámica 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/64.jpeg" alt="Metal cerámica 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Terminaciones con encía rosa</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/61.jpeg" alt="Terminación encía rosa 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/69.jpeg" alt="Terminación encía rosa 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Disilicato de litio</h3>
+                    <p>Carillas e incrustaciones</p>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/21.jpeg" alt="Disilicato de litio 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/40.jpg" alt="Disilicato de litio 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Mimetización de casos complejos</h3>
+                    <p>Diseño DSD, fotografía y escáner facial</p>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/55.jpeg" alt="Mimetización 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/70.jpeg" alt="Mimetización 2" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/71.jpeg" alt="Mimetización 3" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Provisionales y cargas inmediatas</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/73.jpeg" alt="Provisional inmediato" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Nanocomposite</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/74.jpeg" alt="Nanocomposite" loading="lazy" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Prótesis Removible -->
+    <div id="modal-protesis-removible" class="modal" onclick="closeModal('modal-protesis-removible', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Prótesis Removible y Sobredentaduras</h2>
+                <button class="modal-close" onclick="closeModal('modal-protesis-removible')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Prótesis total con barra microfresada</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/63.jpeg" alt="Prótesis total con barra" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Prótesis removible en cr-co</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/108.JPG" alt="Prótesis removible cr-co 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/109.JPG" alt="Prótesis removible cr-co 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Prótesis removible en acetal</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/80.jpeg" alt="Prótesis removible acetal 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/81.jpeg" alt="Prótesis removible acetal 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Prótesis removible en resina</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/106.JPG" alt="Prótesis removible resina 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/107.JPG" alt="Prótesis removible resina 2" loading="lazy" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ortodoncia -->
+    <div id="modal-ortodoncia" class="modal" onclick="closeModal('modal-ortodoncia', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Ortodoncia</h2>
+                <button class="modal-close" onclick="closeModal('modal-ortodoncia')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Ortodoncia funcional</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/97.JPG" alt="Ortodoncia funcional 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/98.JPG" alt="Ortodoncia funcional 2" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/99.JPG" alt="Ortodoncia funcional 3" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/100.JPG" alt="Ortodoncia funcional 4" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Ortodoncia removible</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/101.JPG" alt="Ortodoncia removible 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/102.JPG" alt="Ortodoncia removible 2" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Ortodoncia fija</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/103.JPG" alt="Ortodoncia fija 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/104.JPG" alt="Ortodoncia fija 2" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/105.JPG" alt="Ortodoncia fija 3" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/82.jpeg" alt="Ortodoncia fija 4" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Personalizaciones</h3>
+                    <p>Hacemos personalizaciones de cualquier tipo de aparato.</p>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/30.jpeg" alt="Personalización 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/31.jpeg" alt="Personalización 2" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/35.jpeg" alt="Personalización 3" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <p><strong>Fabricamos cualquier tipo de aparato que usted desee.</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Férulas -->
+    <div id="modal-ferulas" class="modal" onclick="closeModal('modal-ferulas', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Prótesis sobre Implantes - Férulas</h2>
+                <button class="modal-close" onclick="closeModal('modal-ferulas')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Férula de michigan digital rígida</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/54.jpeg" alt="Férula michigan digital rígida" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Férula de michigan digital soft</h3>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/50.jpeg" alt="Férula michigan digital soft" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Férula de michigan artesanal</h3>
+                    <p>Personalizables y sobre modelos digitales</p>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/56.jpeg" alt="Férula michigan artesanal 1" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/78.jpeg" alt="Férula michigan artesanal 2" loading="lazy" /></div>
+                        <div class="modal-image"><img src="media/87.jpeg" alt="Férula michigan artesanal 3" loading="lazy" /></div>
+                    </div>
+                </div>
+                <div class="modal-section">
+                    <h3>Férula deportivas</h3>
+                    <p>Personalizables y sobre modelos digitales</p>
+                    <div class="modal-images">
+                        <div class="modal-image"><img src="media/86.jpeg" alt="Férula deportiva" loading="lazy" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Lupidental. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll con offset para compensar el header fijo
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (!target) return;
+                e.preventDefault();
+                const headerHeight = document.getElementById('main-header').offsetHeight;
+                const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+                window.scrollTo({ top, behavior: 'smooth' });
+            });
+        });
+
+        // Header con efecto al hacer scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Reveal de elementos al hacer scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    // Delay escalonado para elementos consecutivos
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, 80 * (Array.from(revealElements).indexOf(entry.target) % 6));
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId, event) {
+            if (event && event.target.id !== modalId) return;
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
